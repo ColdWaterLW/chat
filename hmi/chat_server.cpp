@@ -58,19 +58,38 @@ void My_Server::WaitForData()
 	socklen_t client_len;
 	int read_bytes = 0;
 	RecvData recv_st;
+	int i;
 	printf("waitfordata\n");
+
+
+	if((read_sock = accept(sock,(struct sockaddr*)&client,&client_len)) == -1)
+	{
+		perror("accept:");
+		//continue;
+	}
 	while(1)
 	{
-		if(read_sock = accept(sock,(struct sockaddr*)&client,&client_len) == -1)
-		{
-			perror("accept:");
-			continue;
-		}
 		printf("test1\n");
 		read_bytes = recv(read_sock,recv_st.buf,MAX_READ_LEN-1,0);
+		if(read_bytes <= 0)
+		{
+			perror("recv:");
+			close(read_sock);
+			if((read_sock = accept(sock,(struct sockaddr*)&client,&client_len)) == -1)
+			{
+				perror("accept:");
+				//continue;
+			}
+			continue;
+		}
 		//recv_st.buf[read_bytes] = 0;
-		printf("read_bytes = %d\n");//printf("recv:%s\n",recv_st.buf);
-		printf("%02x %02x\n",recv_st.buf[0],recv_st.buf[1]);
+		printf("read_bytes = %d\n",read_bytes);//printf("recv:%s\n",recv_st.buf);
+		for(i = 0; i < read_bytes; i++)
+		{
+			printf("%02x ",recv_st.buf[i]);
+		}
+		printf("\n");
+		
 	}
 }
 

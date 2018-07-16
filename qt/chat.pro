@@ -26,9 +26,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    My_Send.cpp
+    My_Send.cpp \
+    My_TimeOper.cpp
 
 HEADERS  += mainwindow.h \
-    My_Send.h
+    My_Send.h \
+    My_TimeOper.h
 
 FORMS    += mainwindow.ui

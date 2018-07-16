@@ -1,4 +1,5 @@
 #include "My_Send.h"
+#include "My_TimeOper.h"
 
 My_Send::My_Send(const char* data, int len)
 {
@@ -9,7 +10,7 @@ My_Send::My_Send(const char* data, int len)
         clientSocket = new QTcpSocket;
         //dist_ip = "192.168.0.222";
         clientSocket->abort();
-        clientSocket->connectToHost("192.168.0.222",7000);
+        clientSocket->connectToHost("192.168.1.222",7000);
 
     }
 }
@@ -30,4 +31,5 @@ void My_Send::SendData()
         qDebug("%02x ",sendbuf[i]);
     qDebug("\n");
     clientSocket->write(sendbuf,sendlen);
+    My_TimeOper::mSleep(500);
 }
