@@ -6,14 +6,14 @@
 class My_Send
 {
 public:
-    My_Send(const char* data, int len);
+    My_Send();
     ~My_Send();
 
     QTcpSocket *clientSocket;
     const char* sendbuf;
     int sendlen;
 
-    void SendData();
+    void SendData(const char* data, int sendlen);
 
 };
 
